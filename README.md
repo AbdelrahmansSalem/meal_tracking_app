@@ -1,4 +1,4 @@
-# meal_tracking_app
+# Meal Tracking App
 
 A new Flutter project.
 
