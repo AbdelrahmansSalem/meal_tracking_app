@@ -4,14 +4,20 @@ import 'package:meal_tracking_app/presentation/app_layout/app_cubit/app_cublit.d
 import 'package:meal_tracking_app/presentation/app_layout/app_cubit/app_states.dart';
 import 'package:meal_tracking_app/presentation/resources/color_manager.dart';
 import 'package:meal_tracking_app/presentation/resources/size_manager.dart';
+import 'package:meal_tracking_app/presentation/search_meal_screen/search_cubit/search_cubit.dart';
 
 class AppLayout extends StatelessWidget {
   const AppLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AppCublit>(
-        create: (context) => AppCublit()..getData(),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AppCublit()..getData(),
+          ),
+          BlocProvider(create: (context) => SearchCubit()),
+        ],
         child: BlocConsumer<AppCublit, AppStates>(
           builder: (context, state) {
             var _cubit = AppCublit.get(context);

@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_tracking_app/app/di.dart';
-import 'package:meal_tracking_app/data/db_factory.dart';
-import 'package:meal_tracking_app/data/db_service_client.dart';
+import 'package:meal_tracking_app/data/local_data/db_factory.dart';
+import 'package:meal_tracking_app/data/local_data/db_service_client.dart';
 import 'package:meal_tracking_app/domain/models.dart';
 import 'package:meal_tracking_app/presentation/app_layout/app_cubit/app_states.dart';
 import 'package:meal_tracking_app/presentation/meal_adding_screen/meal_adding_screen.dart';
 import 'package:meal_tracking_app/presentation/meals_screen/meals_screen.dart';
+import 'package:meal_tracking_app/presentation/search_meal_screen/search_screen.dart';
 
 class AppCublit extends Cubit<AppStates> {
   AppCublit() : super(AppInitalState());
@@ -21,12 +22,17 @@ class AppCublit extends Cubit<AppStates> {
 
   File? imageFile = null;
 
-  final List<Widget> screens = [MealsScreen(), MealAddingScreen()];
+  final List<Widget> screens = [
+    MealsScreen(),
+    MealAddingScreen(),
+    SearchScreen()
+  ];
   final List<BottomNavigationBarItem> list = [
     BottomNavigationBarItem(
         icon: Icon(Icons.food_bank_rounded), label: "My Meals"),
     BottomNavigationBarItem(
         icon: Icon(Icons.add_circle_sharp), label: "Add Meal"),
+    BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: "Search")
   ];
   int currentIndex = 0;
   void changeBottomNavIndex({required int index}) {
